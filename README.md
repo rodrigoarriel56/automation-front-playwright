@@ -1,61 +1,51 @@
+[![Badge ServeRest](https://img.shields.io/badge/API-ServeRest-green)](https://github.com/ServeRest/ServeRest/)
+
 # automation-front-playwright
-	
-# Descrição da feramenta Playwright
-	
-	O Playwright Test foi criado especificamente para acomodar as necessidades de testes ponta a ponta.
-	 Playwright oferece suporte a todos os mecanismos de renderização modernos, incluindo Chromium, WebKit e Firefox.
-	  Teste em Windows, Linux e macOS, localmente ou em CI, headless ou headless com emulação móvel nativa do Google 
-	   Chrome para Android e Mobile Safari.
-   
-# Requisitos para a instalação do Playwright
-	Garantir que tenha o NPM instalado em seu sistema operacional.
 
-# Caso não tenha o NPM instalado em seu sistema operacional, segue um passo a passo de como fazer a instalação e Configuração
-	
-# Installing Playwright
+Este é um projeto de automação de testes utilizando [Playwright Test](https://playwright.dev/) tendo como base de testes os seguintes [API](https://serverest.dev/) E [Front-end](https://front.serverest.dev/).
 
-	Comece instalando o Playwright usando npm ou yarn.
-		Alternativamente, você também pode começar e executar seus testes usando a extensão do VS Code ou outra IDE desejada.
+## Pre-requisitos
 
-Get started by installing Playwright using npm or yarn. Alternatively you can also get started and run your tests using the VS Code Extension.
+### Node.js
 
-Instalação via  "npm"
+Certifique-se de ter a versão correta das ferramentas, que pode ser encontrada em `.nvmrc` arquivo na raiz do repositório. Verificar as framewoks instalados [nvm](https://github.com/nvm-sh/nvm) para gerenciar diferentes versões de nó em seu ambiente.
 
-```
-npm init playwright@latest
-```
+### Yarn
 
+The project also uses [Yarn](https://yarnpkg.com/), so follow the [installation steps](https://classic.yarnpkg.com/lang/en/docs/install/) in case you don't have it.
 
+### Docker
 
-1 - Configuração do Ambiente Playwright:
-```
-Instalar Node.js
-```
-```
-Escolher uma IDE de JavaScript para programar
-```
-2- Passo de um clone no projeto
-```
-git clone https://github.com/rodrigoarriel56/automacao-cypress-cucumber.git
-```
-3- Passo de entrar na pasta do projeto
-```
-cd automacao-cypress-cucumber.git
-``` 
-4- Instalar o Cypress com Cucumber executando o seguinte comando na raíz da pasta do seu projeto
-```
-npm install
-```
-5 - Passo de execução dos testes
-5.1 - Para iniciar os testes, execute um dos seguintes comandos no terminal do VS Code:
+The projects used Docker to spin up ServeRest API. Follow instructions from their [official docs](https://docs.docker.com/engine/install/) to install Docker engine in your environment.
 
-```
-Para executar os testes via terminal: npx cypress run
-```
-```
-Para executar os testes via browser: npx cypress run --browser chrome --no-exit
-```
-```
-Para executar os testes via script salvo em package.json: npm run test:chrome    
+## Running locally
+- Install dependencies: `yarn install`
+- Start Serverest server: `yarn api:start`
+- Run API tests: `yarn test:api`
+- Run End-to-end tests: `yarn test:e2e`
+- Run Visual Regression tests: `yarn test:visual` (you will need a Happo account and `HAPPO_API_KEY`/`HAPPO_API_SECRET` environment variables set)
 
-```
+### Debugging
+
+To run Playwright in debug mode, pass the `PWDEBUG=1` environment variable in the command, for example: `PWDEBUG=1 yarn test:e2e`
+
+When a test fails, the project is configured to save screenshots and a trace file, inside `test-reports` folder. You can run [Playwright's Trace Viewer](https://playwright.dev/docs/trace-viewer) with `show-trace` command: `yarn playwright show-trace test-results/some-test-path/trace.zip`
+
+Please refer to [Playwright's Debugging docs](https://playwright.dev/docs/debug) for further information on debugging features.
+
+### Tips
+
+- To stop running ServeRest container: `docker stop serverest`
+- To restart ServeRest container: `docker restart serverest`
+- To remove ServeRest container (no need to stop it first, the `-f` option will force its removal even if it is running): `docker rm -f serverest`
+
+## Reporting
+
+Test reports can be generated with [Allure reports](https://github.com/allure-framework/allure2), following the steps below:
+
+- Generate report: `yarn allure:generate`
+- Open HTML report: `yarn allure:open`  
+
+## CI
+
+The project uses [GitHub Actions](https://docs.github.com/en/actions) and tests are run automatically on PRs and on merge to `main` branch.
