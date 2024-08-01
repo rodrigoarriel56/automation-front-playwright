@@ -1,4 +1,4 @@
-# automation-front-playwright-nodejs
+# automation-front-playwright
 	
 # Descrição da feramenta Playwright
 	
