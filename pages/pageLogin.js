@@ -1,23 +1,28 @@
-class PageLogin {
-    constructor(page) {
-        this.page = page;
+class LoginPage {
+  constructor(page) {
+    this.page = page;
 
-        this.inputUsername = '#user-name';
-        this.inputPassword = '#password';
-        this.btnLogin = '#login-button';
-    }
+    // Obectos de página
+    this.inputUsuario = '#user-name';
+    this.inputSenha = '#password';
+    this.botaoLogin = '#login-button';
 
-    async preencherUsuario(usuario) {
-        await this.page.fill(this.inputUsername, usuario);
-    }
+    this.url = 'https://www.saucedemo.com/';
+  }
 
-    async preencherSenha(senha) {
-        await this.page.fill(this.inputPassword, senha);
-    }
+  async acessarPaginaLogin() {
+    await this.page.goto(this.url);
+  }
 
-    async clicarLogin() {
-        await this.page.click(this.btnLogin);
-    }
+  async realizarLogin(usuario, senha) {
+    await this.page.fill(this.inputUsuario, usuario);
+    await this.page.fill(this.inputSenha, senha);
+    await this.page.click(this.botaoLogin);
+  }
+
+  async loginRealizadoComSucesso() {
+    return this.page.url().includes('inventory.html');
+  }
 }
 
-module.exports = PageLogin;
+module.exports = LoginPage;
