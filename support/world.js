@@ -1,15 +1,21 @@
-const { chromium } = require('playwright');
 const { setWorldConstructor } = require('@cucumber/cucumber');
+const { chromium } = require('playwright');
 
 class CustomWorld {
-    async init() {
-        this.browser = await chromium.launch({ headless: false });
-        this.page = await this.browser.newPage();
-    }
+  async init() {
+    this.browser = await chromium.launch({
+      headless: true // IMPORTANTE para evitar lentidão
+    });
 
-    async close() {
-        await this.browser.close();
+    this.context = await this.browser.newContext();
+    this.page = await this.context.newPage();
+  }
+
+  async close() {
+    if (this.browser) {
+      await this.browser.close();
     }
+  }
 }
 
 setWorldConstructor(CustomWorld);
