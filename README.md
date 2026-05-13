@@ -5,19 +5,40 @@
 O Playwright é uma estrutura de automação de código aberto desenvolvida pela Microsoft para testes de ponta a ponta rápidos e confiáveis ​​e extração de dados da web. 
 Ele permite que os desenvolvedores automatizem ações em navegadores modernos como: Chrome, Chromium, Edge, Firefox e WebKit usando uma única API, com suporte a linguagens como JavaScript, TypeScript, Python, Java e .NET.
 
+## 📌 Pré-requisitos
+
+- Node.js 18+
+- npm ou yarn
+- Git
+
+Verifique:
+
+```sh
+node -v
+npm -v
+```
+
 ### Instalação
 <img width="226" alt="image" src="https://github.com/user-attachments/assets/eaee904f-d74d-4418-85da-579e2a4a3a9e" />
 
-Primeiro vamos instalar o Node.
-A instalação do Node no Windows é relativamente bem simples, basta acessar o site oficial e executar download do instalador:
+Clone o repositório:
+
+git clone https://github.com/rodrigoarriel56/automation-front-playwright.git
+
 ```sh
-$ https://nodejs.org/en/download
+cd automation-front-playwright
 ```
-Vamos utilizar a versão Current do Node é 19.9.0. 
-Execute a instalação, seguindo as instruções na tela e pronto.
+
+Instale dependências:
+## 📦 Instalar Playwright
+
+```sh
+npx playwright install
+```
 
 ### Comandos para execução dos testes
 Para executar os testes:
+
 ```sh
-node teste.js e acionar o enter
+npm run test
 ```
