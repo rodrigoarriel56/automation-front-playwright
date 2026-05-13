@@ -13,8 +13,10 @@ Ele permite que os desenvolvedores automatizem ações em navegadores modernos c
 
 Verifique:
 
+```sh
 node -v
 npm -v
+```
 
 ### Instalação
 <img width="226" alt="image" src="https://github.com/user-attachments/assets/eaee904f-d74d-4418-85da-579e2a4a3a9e" />
@@ -22,15 +24,21 @@ npm -v
 Clone o repositório:
 
 git clone https://github.com/rodrigoarriel56/automation-front-playwright.git
-cd seu-projeto
+
+```sh
+cd automation-front-playwright
+```
 
 Instale dependências:
 ## 📦 Instalar Playwright
 
+```sh
 npx playwright install
+```
 
 ### Comandos para execução dos testes
 Para executar os testes:
+
 ```sh
 npm run test
 ```
