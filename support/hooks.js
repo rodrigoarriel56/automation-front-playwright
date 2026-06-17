@@ -9,23 +9,31 @@ Before(async function () {
 });
 
 After(async function (scenario) {
-  // cria pasta de screenshots se não existir
+
   const screenshotsDir = path.resolve('screenshots');
+
   if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir);
   }
 
-  // nome do arquivo com cenário
-  const scenarioName = scenario.pickle.name.replace(/[^a-zA-Z0-9]/g, '_');
+  const scenarioName = scenario.pickle.name
+    .replace(/[^a-zA-Z0-9]/g, '_')
+    .toLowerCase();
+
+  const status = scenario.result?.status;
+
   const screenshotPath = path.join(
     screenshotsDir,
-    `${scenarioName}.png`
+    `${scenarioName}_${status}.png`
   );
 
-  await this.page.screenshot({
-    path: screenshotPath,
-    fullPage: true
-  });
+  // Tira screenshot SOMENTE se falhar (melhor prática)
+  if (status !== 'PASSED') {
+    await this.page.screenshot({
+      path: screenshotPath,
+      fullPage: true
+    });
+  }
 
   await this.close();
 });
